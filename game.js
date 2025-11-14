@@ -19,14 +19,14 @@ class FlappyBird {
             height: 24,
             velocity: 0,
             gravity: 0.3,
-            jump: -6,
+            jump: -5,
             rotation: 0
         };
         
         // 管道数组
         this.pipes = [];
-        this.pipeWidth = 60;
-        this.pipeGap = 180;
+        this.pipeWidth = 110;
+        this.pipeGap = 10;
         this.pipeSpeed = 2;
         this.pipeSpawnRate = 90; // 每90帧生成一个管道
         
