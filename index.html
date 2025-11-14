@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird 复刻版</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1 class="game-title">🐦 Flappy Bird</h1>
+        
+        <!-- 游戏画布 -->
+        <canvas id="gameCanvas" width="400" height="600"></canvas>
+        
+        <!-- 游戏控制面板 -->
+        <div class="game-controls">
+            <button id="startBtn" class="btn btn-primary">开始游戏</button>
+            <button id="restartBtn" class="btn btn-secondary" style="display: none;">重新开始</button>
+        </div>
+        
+        <!-- 分数显示 -->
+        <div class="score-display">
+            <span>分数: <span id="score">0</span></span>
+            <span>最高分: <span id="highScore">0</span></span>
+        </div>
+        
+        <!-- 游戏说明 -->
+        <div class="game-instructions">
+            <h3>游戏说明</h3>
+            <p>🎮 点击屏幕或按空格键让小鸟飞行</p>
+            <p>🚧 避开绿色管道，穿过管道得分</p>
+            <p>💥 碰到管道或地面游戏结束</p>
+        </div>
+    </div>
+    
+    <!-- 游戏结束弹窗 -->
+    <div id="gameOverModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <h2>游戏结束!</h2>
+            <p>本局得分: <span id="finalScore">0</span></p>
+            <p>历史最高分: <span id="modalHighScore">0</span></p>
+            <button id="playAgainBtn" class="btn btn-primary">再玩一次</button>
+        </div>
+    </div>
+    
+    <script src="game.js"></script>
+</body>
+</html>
