@@ -18,7 +18,7 @@ class FlappyBird {
             width: 34,
             height: 24,
             velocity: 0,
-            gravity: 0.3,
+            gravity: 0.27,
             jump: -6,
             rotation: 0
         };
