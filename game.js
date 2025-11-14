@@ -25,10 +25,10 @@ class FlappyBird {
         
         // 管道数组
         this.pipes = [];
-        this.pipeWidth = 80;
+        this.pipeWidth = 60;
         this.pipeGap = 150;
         this.pipeSpeed = 2;
-        this.pipeSpawnRate = 90; // 每90帧生成一个管道
+        this.pipeSpawnRate = 100; // 每90帧生成一个管道
         
         // 地面
         this.groundHeight = 100;
