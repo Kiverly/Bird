@@ -37,6 +37,15 @@ class FlappyBird {
         
         // 帧计数
         this.frameCount = 0;
+        this.lastTime = performance.now();
+        this.targetFPS = 60;
+        this.frameTime = 1000 / this.targetFPS; // 16.67ms for 60fps
+        
+        // 检测设备类型和刷新率
+        this.detectDevice();
+        
+        // 根据设备调整参数
+        this.adjustForDevice();
         
         // 绑定事件
         this.bindEvents();
@@ -46,6 +55,38 @@ class FlappyBird {
         
         // 开始游戏循环
         this.gameLoop();
+    }
+    
+    detectDevice() {
+        // 检测是否为移动设备
+        this.isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        this.isHighRefreshRate = window.devicePixelRatio > 1;
+        
+        console.log('设备检测:', {
+            isMobile: this.isMobile,
+            isHighRefreshRate: this.isHighRefreshRate,
+            pixelRatio: window.devicePixelRatio
+        });
+    }
+    
+    adjustForDevice() {
+        // 如果是移动设备，进一步调整参数以降低难度
+        if (this.isMobile) {
+            // 增加管道间距和生成间隔，让游戏更简单
+            this.pipeGap = Math.max(this.pipeGap, 280); // 最小280px间距
+            this.pipeSpawnRate = Math.max(this.pipeSpawnRate, 150); // 最少150帧生成
+            
+            // 稍微减弱重力，增强跳跃（但不影响用户手动设置的跳跃力度）
+            this.bird.gravity = Math.min(this.bird.gravity, 0.25);
+            // 保留用户设置的jump值，不自动调整
+            
+            console.log('移动设备参数调整:', {
+                pipeGap: this.pipeGap,
+                pipeSpawnRate: this.pipeSpawnRate,
+                gravity: this.bird.gravity,
+                jump: this.bird.jump
+            });
+        }
     }
     
     bindEvents() {
@@ -125,8 +166,16 @@ class FlappyBird {
     }
     
     gameLoop() {
-        this.update();
-        this.draw();
+        const currentTime = performance.now();
+        const deltaTime = currentTime - this.lastTime;
+        
+        // 标准化时间步长，确保在不同刷新率下保持一致的游戏速度
+        if (deltaTime >= this.frameTime - 1) { // 允许1ms的误差
+            this.lastTime = currentTime;
+            this.update();
+            this.draw();
+        }
+        
         requestAnimationFrame(() => this.gameLoop());
     }
     
